@@ -20,3 +20,12 @@ https://github.com/dsnet/compress/blob/master/doc/bzip2-format.pdf
 
 This github file contains an unofficial specification of the bzip2 format.
 It also contains code on how to efficiently implement the BWT, Move-to-front (MTF) transform, run length encoding, amd Huffman encoding
+
+
+------------------------
+
+Ren Weizheng, Wang Haobo, Xu Lianming and Cui Yansong, "Research on a quasi-lossless compression algorithm based on huffman coding," Proceedings 2011 International Conference on Transportation, Mechanical, and Electrical Engineering (TMEE), 2011, pp. 1729-1732, doi: 10.1109/TMEE.2011.6199546.
+
+H. A. Elsayed, "Burrows-Wheeler Transform and combination of Move-to-Front coding and Run Length Encoding for lossless audio coding," 2014 9th International Conference on Computer Engineering & Systems (ICCES), 2014, pp. 354-359, doi: 10.1109/ICCES.2014.7030985.
+
+These papers contain information on some of the techniques involved in the bzip2 algorithm, including the Burrows-Wheeler Transform and Huffman Coding.
