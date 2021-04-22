@@ -1,1 +1,22 @@
+https://ezproxy.stevens.edu:2122/chapter/10.1007/978-0-387-78909-5_2 
 
+2008) How the Burrows-Wheeler Transform works. In: The Burrows-Wheeler Transform: Data Compression, Suffix Arrays, and Pattern Matching. Springer, Boston, MA. https://doi.org/10.1007/978-0-387-78909-5_2
+
+Explains how the BWT works. This chapter also contains psudocode, which will be helpful for us in recreating this aspect of the bzip2 process.
+
+
+-----------------------
+
+https://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-124.pdf
+
+This is the original paper written by M. Burrows and D.J. Wheeler
+
+Contains explanations and psudocode on the algorithm.
+
+
+-----------------------
+
+https://github.com/dsnet/compress/blob/master/doc/bzip2-format.pdf
+
+This github file contains an unofficial specification of the bzip2 format.
+It also contains code on how to efficiently implement the BWT, Move-to-front (MTF) transform, run length encoding, amd Huffman encoding
