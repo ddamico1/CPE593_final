@@ -58,6 +58,13 @@ void BWT_encode(ifstream& file, ofstream& out) {
     return;
 };
 
+
+/*Not sure if decoding from a Bzip2 encoded file is actually possible.
+//As mentioned in the original paper by Burrows and Wheeler, the index at which
+//the original string appears in the matrix of rotations is needed to decode.
+//My thinking is that we have no way of knowing how/where this index is stored by the actual Bzip2 program
+// -Dante
+*/
 void BWT_decode(std::ifstream& encoded_file, std::ofstream& out) {
 
     if(!encoded_file.good())
