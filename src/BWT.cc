@@ -54,6 +54,7 @@ void BWT_encode(ifstream& file, ofstream& out) {
 
         }
     }
+    cout << "Burrows-Wheeler Transform Complete" << endl;
     return;
 };
 
