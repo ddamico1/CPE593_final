@@ -1,3 +1,0 @@
-[1] Ren Weizheng, Wang Haobo, Xu Lianming and Cui Yansong, "Research on a quasi-lossless compression algorithm based on huffman coding," Proceedings 2011 International Conference on Transportation, Mechanical, and Electrical Engineering (TMEE), 2011, pp. 1729-1732, doi: 10.1109/TMEE.2011.6199546.
-[2] H. A. Elsayed, "Burrows-Wheeler Transform and combination of Move-to-Front coding and Run Length Encoding for lossless audio coding," 2014 9th International Conference on Computer Engineering & Systems (ICCES), 2014, pp. 354-359, doi: 10.1109/ICCES.2014.7030985.
-
