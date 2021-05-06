@@ -6,7 +6,7 @@
 
 
 void run_length_encode(std::ifstream& file, std::ofstream& out);
-void run_length_decode(std::ifstream &encoded_file, std::ofstream &out);
+void run_length_decode(std::ifstream& encoded_file, std::ofstream& out);
 
 
 #endif
