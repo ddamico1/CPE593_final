@@ -64,6 +64,7 @@ void BWT_encode(ifstream& file, ofstream& out) {
 //the original string appears in the matrix of rotations is needed to decode.
 //My thinking is that we have no way of knowing how/where this index is stored by the actual Bzip2 program
 // -Dante
+// --- "File Format" section of Bzip2 Wikipedia page may shed light on this --- 
 */
 void BWT_decode(std::ifstream& encoded_file, std::ofstream& out) {
 
