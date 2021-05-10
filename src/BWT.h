@@ -11,4 +11,6 @@
 void BWT_encode(std::ifstream& file, std::ofstream& out);
 void BWT_decode(std::ifstream &encoded_file, std::ofstream &out);
 
+using namespace std;
+
 #endif
