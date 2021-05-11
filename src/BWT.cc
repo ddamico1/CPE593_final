@@ -7,6 +7,7 @@
  * the original string in the vector of rotated and shuffled strings
  *
  */
+#include "BWT.h"
 
 int origPtr;
 
@@ -23,9 +24,15 @@ void BWT_encode(ifstream& file, ofstream& out) {
     while(file.good()) {
         //build string from ifstream and keep track of length
         char currentChar = file.get();
+
+        if((int)currentChar == -1)
+            break;
+
         text += currentChar;
         count++;
     }
+
+    cout << "Text: " << text << '\n';
 
     //create vector of rotations
     for (int i = 0; i < count; i++) {
@@ -33,8 +40,21 @@ void BWT_encode(ifstream& file, ofstream& out) {
         cyclicTexts.push_back(temp);
     }
 
+    cout << "Rotations: \n";
+    for(auto s: cyclicTexts) {
+        cout << s << '\n';
+    }
+    cout << '\n';
+
     //sort rotations
     sort(cyclicTexts.begin(), cyclicTexts.end());
+
+    cout << "Sorted rotations: \n";
+    for(auto s: cyclicTexts) {
+        cout << s << '\n';
+    }
+    cout << '\n';
+    
 
     //track origin pointer index
     auto it = find(cyclicTexts.begin(), cyclicTexts.end(), text);
@@ -60,6 +80,7 @@ void BWT_encode(ifstream& file, ofstream& out) {
 
 //How to pass the origin pointer to the decoder?
 void BWT_decode(ifstream& encoded_file, ofstream& out) {
+    cout << "Decoding\n";
 
     if(!encoded_file.good())
         return;
@@ -73,9 +94,15 @@ void BWT_decode(ifstream& encoded_file, ofstream& out) {
     while(encoded_file.good()){
         //build string from fstream
         char currentChar = encoded_file.get();
+
+        if((int)currentChar == -1)
+            break;
+
         text += currentChar;
         count++;
     }
+
+    cout << "Text: " << text << '\n';
 
     //create vector of rotations
     for (int i = 0; i < count; i++) {
@@ -83,11 +110,23 @@ void BWT_decode(ifstream& encoded_file, ofstream& out) {
         cyclicTexts.push_back(temp);
     }
 
+    cout << "rotations: \n";
+    for(auto s: cyclicTexts) {
+        cout << s << '\n';
+    }
+    cout << '\n';
+
     //sort rotations
     sort(cyclicTexts.begin(), cyclicTexts.end());
 
+    cout << "Sorted rotations: \n";
+    for(auto s: cyclicTexts) {
+        cout << s << '\n';
+    }
+    cout << '\n';
+
     //output each character from original string
-    for (char x :cyclicTexts[origPtr]) {
+    for (char x :cyclicTexts[4]) {  // Hardcoded origin pointer 4 for testing
         out.put(x);
     }
 
