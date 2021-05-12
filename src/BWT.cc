@@ -102,36 +102,29 @@ void BWT_decode(ifstream& encoded_file, ofstream& out) {
         count++;
     }
 
-    cout << "Text: " << text << '\n';
+    uint32_t length = text.size();
 
-    //create vector of rotations
-    for (int i = 0; i < count; i++) {
-        string temp = text.substr(i) + text.substr(0, i);
-        cyclicTexts.push_back(temp);
+    for(uint32_t i = 0; i < length; i++)
+        cyclicTexts.push_back("");
+    
+    uint32_t index = 0;
+    for(uint32_t i = 0; i < length; i++) {
+        for(vector<string>::iterator j = cyclicTexts.begin(); j != cyclicTexts.end(); ++j) {
+            *j = text.at(index++) + *j;
+        }
+        sort(cyclicTexts.begin(), cyclicTexts.end());
+        index = 0;
     }
-
-    cout << "rotations: \n";
-    for(auto s: cyclicTexts) {
-        cout << s << '\n';
-    }
-    cout << '\n';
-
-    //sort rotations
-    sort(cyclicTexts.begin(), cyclicTexts.end());
-
-    cout << "Sorted rotations: \n";
-    for(auto s: cyclicTexts) {
-        cout << s << '\n';
-    }
-    cout << '\n';
+    
 
     //output each character from original string
-    for (char x :cyclicTexts[4]) {  // Hardcoded origin pointer 4 for testing
+    for (char x :cyclicTexts[origPtr]) {
         out.put(x);
     }
 
+    cout << "Inverse Burrows-Wheeler Transform Complete" << endl;
     return;
-};
+}
 
 /*Not sure if decoding from a Bzip2 encoded file is actually possible.
 //As mentioned in the original paper by Burrows and Wheeler, the index at which
