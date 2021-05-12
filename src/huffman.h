@@ -5,7 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <unordered_map>
-#include <bitset>
+#include <string>
 
 
 class HuffmanTree {
@@ -20,18 +20,21 @@ private:
 
     Node* root;
     std::ifstream& file;
+    std::unordered_map<char, std::string> huffman_code;
+    std::vector<uint8_t> delta;
+    std::vector<std::string> encoded;
 
     // Internal function to build the Huffman Tree
     void build_tree();
 
     // Internal functions to encode/decode the input
     void huffman_encode(Node* root, std::string code, std::unordered_map<char, std::string>& huffman_codes);
-    void huffman_decode();
+    int huffman_decode(const std::string& code);
 
 public:
     HuffmanTree(std::ifstream& file) : file(file) {}
     void encode(std::ofstream& out);
-    void decode(std::ofstream& out);
+    void decode(std::ifstream& encoded_file, std::ofstream& out);
 };
 
 

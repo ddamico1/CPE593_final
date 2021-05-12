@@ -9,9 +9,6 @@
 
 // Goal - encode the output file such that the most frequent symbols have the least bits
 void HuffmanTree::encode(std::ofstream& out) {
-    // Create a hashmap for the symbol-code mappings to be stored
-    std::unordered_map<char, std::string> huffman_code;
-
     // Construct the Huffman Tree
     build_tree();
 
@@ -32,8 +29,10 @@ void HuffmanTree::encode(std::ofstream& out) {
     // Since each symbol now has different bit lengths, we will buffer each bit and write bytes when ready
     uint8_t next_byte = 0;
     uint8_t bit_count = 0;
-    while(file.good()) {
-        const std::string* code = &huffman_code[file.get()];
+    int prev_size = 0;
+    int symbol;
+    while((symbol=file.get()) != -1) {
+        const std::string* code = &huffman_code[symbol];
 
         for(uint8_t i = 0; i < code->size(); i++) {
             uint8_t next_bit = code->at(i) == '1';  // 0 or 1
@@ -50,6 +49,10 @@ void HuffmanTree::encode(std::ofstream& out) {
             
         }
 
+        delta.push_back((int)code->size() - prev_size);
+        prev_size = (int)code->size();
+
+        encoded.push_back(*code);  // debugging
     }
 
     // Write whatever is left in the buffer
@@ -59,8 +62,16 @@ void HuffmanTree::encode(std::ofstream& out) {
     // TODO: save the mapping so that decoding is possible
 }
 
-void HuffmanTree::decode(std::ofstream& out) {
-    // TODO: implement this
+void HuffmanTree::decode(std::ifstream& encoded_file, std::ofstream& out) {
+    uint8_t num_bits = 0;
+    uint8_t current_byte, bit_index = 0;
+
+    for(std::vector<std::string>::const_iterator i = encoded.begin(); i != encoded.end(); ++i) {
+        for(std::unordered_map<char,std::string>::const_iterator j = huffman_code.begin(); j != huffman_code.end(); ++j) {
+            if(j->second == *i)
+                out.put(j->first);
+        }
+    }
 }
 
 
@@ -69,8 +80,9 @@ void HuffmanTree::build_tree() {
     std::unordered_map<char, uint32_t> hist;
 
     // First step: record the frequency of each character in the file
-    while(file.good())
-        hist[file.get()]++;
+    int symbol;
+    while((symbol=file.get()) != -1)
+        hist[symbol]++;
 
     // Second step: create a priority queue that contains the nodes
     // Lambda function is used to determine priorities when inserting nodes
@@ -115,4 +127,22 @@ void HuffmanTree::huffman_encode(Node* root, std::string code, std::unordered_ma
     huffman_encode(root->right, code + "1", huffman_code);
 }
 
+int HuffmanTree::huffman_decode(const std::string& code) {
+#if 0
+    if(root == nullptr)
+        return;
+
+    if(root->left == nullptr && root->right == nullptr)
+        symbol = root->c;
+    else {
+        index++;
+        huffman_decode(code.at(index) == '1' ? root->right : root->left, index, code, symbol);
+    }
+#endif
+    for(std::unordered_map<char,std::string>::const_iterator i = huffman_code.begin(); i != huffman_code.end(); ++i) {
+        if(code == i->second)
+            return i->first;
+    }
+    return -1;
+}
 
