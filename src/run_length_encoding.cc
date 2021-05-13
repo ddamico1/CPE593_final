@@ -15,6 +15,9 @@ void run_length_encode(std::ifstream& file, std::ofstream& out) {
     while(file.good()) {
         // Keep reading characters until a new (non-repeating) character is found
         while((current_char=file.get()) == prev_char) {
+            if((int)current_char == -1)
+                break;
+
             count++;
 
             // Avoid overflow
@@ -27,7 +30,7 @@ void run_length_encode(std::ifstream& file, std::ofstream& out) {
             // Write the repeated character four times followed by the number of subsequent repeats
             for (i = 0; i < 4; i++)
                 out << prev_char;
-            out.put(count - 4);
+            out.put(count-4);
         }
         else {
             // If there were fewer than 4 repeating characters, just write them directly
@@ -43,7 +46,7 @@ void run_length_encode(std::ifstream& file, std::ofstream& out) {
 
     std::cout << "File compressed using run-length encoding\n";
 }
-
+int x = 0;
 void run_length_decode(std::ifstream& encoded_file, std::ofstream& out) {
     if(!encoded_file.good())
         return;
@@ -54,24 +57,28 @@ void run_length_decode(std::ifstream& encoded_file, std::ofstream& out) {
     while(encoded_file.good()) {
         int current_char = encoded_file.get();
 
+        if((int)current_char == -1)
+            break;
+
         if(current_char == prev_char)
             run_length++;
-        
-        if(run_length == 3) {
+        x++;
+        if(run_length == /*3*/4) {
+            std::cout << (int)x << '\n';
             run_length = (uint8_t) encoded_file.get();
             
             for(uint8_t i = 0; i < run_length; i++)
                 out.put(prev_char);
 
             run_length = 0;
-            
+            //continue;
         }
 
         out.put(prev_char);
         prev_char = current_char;
     }
 
-    std::cout << "File decompressed using run-length decoding\n";
+    out.put(prev_char);
 }
 
 

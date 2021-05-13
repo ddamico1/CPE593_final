@@ -15,6 +15,9 @@ void mtf_encode(std::ifstream& file, std::ofstream& out) {
     while(file.good()) {
         int c = file.get();
 
+        if((int)c == -1)
+            break;
+
         // Look for the current symbol in the symbol table
         for(i = 0; i < sizeof(symbol_table); i++) {
             if(symbol_table[i] == c) {
@@ -36,12 +39,17 @@ void mtf_decode(std::ifstream& encoded_file, std::ofstream& out) {
     while(encoded_file.good()) {
         uint8_t position = (uint8_t) encoded_file.get();
 
-        // Output the symbol at this position (except for EOF)
-        if(symbol_table[position] != 255)
+        if((int)position == -1)
+            break;
+
+        // Output the symbol at this position
+        if((int)symbol_table[position] != 255)
             out.put(symbol_table[position]);
 
         // Move this symbol to the front
         move_to_front(position);
+
+        std::cout<< (int)symbol_table[0]<<'\n';
     }
 }
 
