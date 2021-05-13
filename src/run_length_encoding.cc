@@ -64,7 +64,6 @@ void run_length_decode(std::ifstream& encoded_file, std::ofstream& out) {
             run_length++;
         x++;
         if(run_length == /*3*/4) {
-            std::cout << (int)x << '\n';
             run_length = (uint8_t) encoded_file.get();
             
             for(uint8_t i = 0; i < run_length; i++)

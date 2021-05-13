@@ -48,8 +48,6 @@ void mtf_decode(std::ifstream& encoded_file, std::ofstream& out) {
 
         // Move this symbol to the front
         move_to_front(position);
-
-        std::cout<< (int)symbol_table[0]<<'\n';
     }
 }
 

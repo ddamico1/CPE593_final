@@ -15,7 +15,7 @@ void HuffmanTree::encode(std::ofstream& out) {
     // Map the symbols in the file to Huffman coded values
     huffman_encode(root, "", huffman_code);  // Set initial code to empty
 
-#if 1
+#if 0
     // Display the symbol-codeword pairs
     for(std::unordered_map<char,std::string>::const_iterator i = huffman_code.begin(); i != huffman_code.end(); ++i)
         std::cout << i->first << ": " << i->second << "\n";
